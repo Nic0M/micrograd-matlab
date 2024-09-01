@@ -10,7 +10,7 @@ classdef Value < handle
     end
 
     methods
-        function self = Value(data, children, op) %#codegen
+        function self = Value(data, children, op)
 
             arguments (Input)
                 data (1, 1) double
@@ -32,7 +32,7 @@ classdef Value < handle
             self.op = op;
         end
 
-        function out = plus(self, other) %#codegen
+        function out = plus(self, other)
 
             arguments (Input)
                 self (1, 1) Value
@@ -52,7 +52,7 @@ classdef Value < handle
             out.backward_closure = @backward_closure;
         end
 
-        function out = mtimes(self, other) %#codegen
+        function out = mtimes(self, other)
 
             arguments (Input)
                 self (1, 1) Value
@@ -72,7 +72,7 @@ classdef Value < handle
             out.backward_closure = @backward_closure;
         end
 
-        function out = mpower(self, other) %#codegen
+        function out = mpower(self, other)
 
             arguments (Input)
                 self (1, 1) Value
@@ -91,7 +91,7 @@ classdef Value < handle
             out.backward_closure = @backward_closure;
         end
 
-        function out = relu(self) %#codegen
+        function out = relu(self)
 
             arguments (Input)
                 self (1, 1) Value
@@ -109,7 +109,7 @@ classdef Value < handle
             out.backward_closure = @backward_closure;
         end
 
-        function backward(self) %#codegen
+        function backward(self)
 
             % Implement simple amortized vector for speed
             capacity = 16;
@@ -149,15 +149,15 @@ classdef Value < handle
             end
         end
 
-        function out = uminus(self) %#codegen
+        function out = uminus(self)
             out = self * -1;
         end
 
-        function out = minus(self, other) %#codegen
+        function out = minus(self, other)
             out = self + (-other);
         end
 
-        function out = mrdivide(self, other) %#codegen
+        function out = mrdivide(self, other)
             out = self * other^(-1);
         end
     end

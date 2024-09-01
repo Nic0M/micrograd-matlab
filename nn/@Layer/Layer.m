@@ -5,7 +5,12 @@ classdef Layer < Module
     end
 
     methods
-        function self = Layer(nin, nout, kwargs) %#codegen
+        function self = Layer(nin, nout, kwargs)
+            % Layer Constructor
+            %
+            % nin - number of inputs
+            % nout - number of outputs
+            % nonlin - use non-linear activation function
 
             arguments (Input)
                 nin (1, 1) double
@@ -18,10 +23,10 @@ classdef Layer < Module
             end
 
             self.neurons = arrayfun(@(foo) Neuron(nin, "nonlin", kwargs.nonlin), 1:nout);
-
         end
 
         function act = fire(self, x)
+            % fire Determines whether each Neuron in the layer should fire.
 
             arguments (Input)
                 self (1, 1) Layer
@@ -33,10 +38,11 @@ classdef Layer < Module
             end
 
             act = arrayfun(@(n) n.fire(x), self.neurons);
-
         end
 
         function params = parameters(self)
+            % parameters Returns an array of all of the parameters in the
+            % current layer
 
             arguments (Input)
                 self (1, 1) Layer
@@ -48,11 +54,6 @@ classdef Layer < Module
 
             params = arrayfun(@(n) n.parameters(), self.neurons, "UniformOutput", false);
             params = cat(1, params{:});
-
         end
-
-
-
-
     end
 end

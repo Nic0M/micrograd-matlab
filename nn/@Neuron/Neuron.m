@@ -9,6 +9,7 @@ classdef Neuron < Module
     methods
 
         function self = Neuron(nin, kwargs)
+            % Neuron Creates a Neuron with nin inputs.
 
             arguments (Input)
                 nin (1, 1) double
@@ -30,6 +31,9 @@ classdef Neuron < Module
         end
 
         function act = fire(self, x)
+            % fire Determines whether the Neuron should fire or not.
+            %
+            % If non-linear activation, uses ReLU function.
 
             arguments (Input)
                 self (1, 1) Neuron
@@ -49,9 +53,9 @@ classdef Neuron < Module
 
         end
 
-
-
         function params = parameters(self)
+            % parameters Returns an array of all of the parameters in the
+            % current Neuron
 
             arguments (Input)
                 self (1, 1) Neuron
@@ -62,8 +66,6 @@ classdef Neuron < Module
             end
 
             params = [self.w; self.b];
-
         end
-
     end
 end
